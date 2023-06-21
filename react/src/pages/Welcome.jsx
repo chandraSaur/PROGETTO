@@ -8,7 +8,7 @@ export function Welcome (){
             <img src={logo} alt="logo"/>
             <p>Registrati o effettua il login e inizia a programmare la tua vacanza.</p>
             <div className="login-signup">
-                <LogSigButton url="/login" name='Login'/>
+                <LogSigButton url="https://localhost:3000/login" name='Login'/>
                 <LogSigButton url="/signup" name='Signup'/>
             </div>
         </div>
