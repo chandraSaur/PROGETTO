@@ -19,15 +19,16 @@ export async function runConnection() {
   }
 }
 
-export async function insert() {  
+export async function insertUser(user) {  
 //funzione che sarà chiamata ogniqualvolta si vorrà inserire qualcosa in una collection (che è un oggetto)
 //se ad esempio viene chiamata insertUser avrà come parametro lo user da inserire insertUser(user)
   try {
+    await client.connect()
     const database = client.db(process.env.NAME_DB);
     //creo la collection su ATLAS, in questo caso la coll. degli user
     //su Browse Collections e la chiamo users. 
     const usersCollection = database.collection("users");
-    const result = await usersCollection.insertOne(users);
+    const result = await usersCollection.insertOne(user);
     console.log(`A document was inserted with the _id: ${result.insertedId}`);
   } finally {
     await client.close();

@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Outlet, Link } from "react-router-dom"
 
-import { Home } from './pages/Home'
-import { About } from './pages/About';
+import { Welcome } from './pages/Welcome';
+import { Login } from './pages/Login';
 
 
 function Main() {
@@ -24,14 +24,17 @@ function Main() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />}>
-          <Route path="/Home" element={<Home />} />
-          <Route path="/About" element={<About />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <Welcome/>
+      <BrowserRouter>
+       <Routes>
+         <Route path="/" element={<Welcome />}>
+           <Route path="/login" element={<Login />} />
+         </Route>
+       </Routes>
+     </BrowserRouter>
+    </>
+     
   )
 }
 
