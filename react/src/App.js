@@ -1,39 +1,43 @@
-import './App.css';
+// import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { Outlet, Link } from "react-router-dom"
+import './/pages/welcome.css'
+import logo from './Assets/Woanderlist_Logo.png'
 
-import { Welcome } from './pages/Welcome';
 import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
 
 
-function Main() {
+function Welcome (){
   return (
-    <>
-        <div>
-          <nav>
-            <ul>
-              <li><Link to="/Home">Home</Link></li>
-              <li><Link to="/About">About</Link></li>
-            </ul>
-          </nav>
-          <Outlet />
-        </div>
-    </>
+      <div className="container">
+          <img src={logo} alt="logo"/>
+          <p>Registrati o effettua il login e inizia a programmare la tua vacanza.</p>
+          <div className="login-signup">
+              <LogSigButton url="/login" name='Login'/>
+              <LogSigButton url="/signup" name='Signup'/>
+          </div>
+      </div>
+  )
+}
+
+function LogSigButton({url, name}) {
+  return(
+      <Link to={url}>{name}</Link>
   )
 }
 
 function App() {
   return (
-    <>
-      <Welcome/>
       <BrowserRouter>
        <Routes>
-         <Route path="/" element={<Welcome />} />
-         <Route path="/login" element={<Login />} />
+         <Route path="/">
+          <Route index element={<Welcome/>} />
+          <Route path="login" element={<Login />} />
+          {/* <Route path="signup" element={<Signup />} /> */}
+         </Route>
        </Routes>
-     </BrowserRouter>
-    </>
-     
+     </BrowserRouter>   
   )
 }
 
