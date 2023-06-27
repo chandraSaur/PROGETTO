@@ -1,5 +1,6 @@
 import express from 'express'
 import session from 'express-session'
+import cookieParser from 'cookie-parser' //Cookie-parser - used to parse cookie header to store data on the browser whenever a session is established on the server-side.
 import 'dotenv/config'
 import {runConnection, insertUser, findUser} from './woanderDB.mjs'
 import cors from 'cors';
@@ -10,12 +11,20 @@ const port = 8000
 import bodyParser from 'body-parser'
 app.use(bodyParser.json())
 app.use(cors());
+app.use(cookieParser());  //permette al server di salvare, leggere e avere accesso al cookie
+
+
+//Si ha la necessità di utilizzare i cookie: ogni volta che il client
+//effettuerà una chiamata, dovrà inviare anche i cookie che permettono
+//al server di capire che quel determinato utente è in sessione (dopo il login)
+const oneDay = 1000 * 60 * 60 * 24;
+//session middleware
 app.use(session({
-  secret: 'keyboard cat',      // stringa del middleware per marcare le chiamate
-  resave: false,
-  saveUninitialized: true,
-  cookie: {maxAge: 100000}
-}))
+    secret: process.env.SECRETKEY_SESSION,  //stringa per autenticare la sessione
+    saveUninitialized:true, 
+    cookie: { maxAge: oneDay }, //tempo attivazione cookie. Dopodichè non sarà più inviato. 
+    resave: false 
+}));
 
 runConnection()  //connect to DB
 
@@ -38,7 +47,8 @@ app.post('/login', async (req, res) => {
 
   try {
     if (resultPromise.username == user.username && resultPromise.password == user.password){
-      req.session.user = user.username  
+      req.session.userid = req.body.username  
+      console.log(req.session);
          res
             .status(201)
             .send({
@@ -46,9 +56,14 @@ app.post('/login', async (req, res) => {
          })
     }
   } catch (error) {
-    res.status(403).send(`L'utente non esiste`);
+    res.status(403).send(`Invalid username or password`);
   }
 }) 
+
+app.get('/logout',(req,res) => {
+  req.session.destroy();
+  res.redirect('/');
+});
 
 
 app.listen(port, () => {
