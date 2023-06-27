@@ -9,12 +9,14 @@ import { useNavigate } from 'react-router-dom';
 
 export function Welcome (){
     return (
-        <div className="container">
-            <img src={logo} alt="logo"/>
-            <p>Registrati o effettua il login e inizia a programmare la tua vacanza.</p>
-            <div className="login-signup">
-                <LogSigButton url="/login" name='Login'/>
-                <LogSigButton url="/signup" name='Signup'/>
+        <div className="background">
+            <div className="container">
+                <img src={logo} alt="logo"/>
+                <p>Registrati o effettua il login e inizia a programmare la tua vacanza.</p>
+                <div className="login-signup">
+                    <LogSigButton url="/login" name='Login'/>
+                    <LogSigButton url="/signup" name='Signup'/>
+                </div>
             </div>
         </div>
     )
@@ -65,24 +67,28 @@ export function Signup (){
     return (
         <>
             {submitted ? (
-                <section className="container">
-                    <img src={logo} alt="logo"/>
-                    <p>La registrazione è andata buon fine!</p>
-                    <p><Link to="/login" className="link">Login</Link></p>
-                </section>
+               <div className="background">
+                    <section className="container">
+                        <img src={logo} alt="logo"/>
+                        <p>La registrazione è andata buon fine!</p>
+                        <p><Link to="/login" className="link">Login</Link></p>
+                    </section>
+               </div>
             ) : (
-            <section className="container">
-                <img src={logo} alt="logo"/>
-                <form onSubmit={handleSubmit}>
-                    <input value={email} onChange={handleEmail} placeholder="email"/>
-                    <input value={username} onChange={handleUsername} placeholder="username"/>
-                    <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
-                    <button>Signup</button>
-                </form>
-                <p className={error ? "error" : "invisibile"}>{error}</p>
-            </section>
+                <div className="background">
+                    <section className="container">
+                        <img src={logo} alt="logo"/>
+                        <form onSubmit={handleSubmit}>
+                            <input value={email} onChange={handleEmail} placeholder="email"/>
+                            <input value={username} onChange={handleUsername} placeholder="username"/>
+                            <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
+                            <button>Signup</button>
+                        </form>
+                        <p className={error ? "error" : "invisibile"}>{error}</p>
+                    </section>
+                </div>
             )}
-        </>
+        </>    
     )
   }
 
@@ -120,14 +126,16 @@ export function Signup (){
         }
     }
     return(
-        <section className="container">
-            <img src={logo} alt="logo"/>
-            <form onSubmit={handleLogin}>
-                <input value={username} onChange={handleUsername} placeholder="username"/>
-                <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
-                <button>Login</button>
-            </form>
-            <p className={error ? "error" : "invisibile"}>{error}</p>
-        </section>
+        <div className="background">
+            <section className="container">
+                <img src={logo} alt="logo"/>
+                <form onSubmit={handleLogin}>
+                    <input value={username} onChange={handleUsername} placeholder="username"/>
+                    <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
+                    <button>Login</button>
+                </form>
+                <p className={error ? "error" : "invisibile"}>{error}</p>
+            </section>
+        </div>
         )
     }

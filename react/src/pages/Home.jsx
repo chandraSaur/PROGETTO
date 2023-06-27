@@ -1,5 +1,5 @@
 import {useState, useEffect} from "react"
-// import './home.css'
+import './home.css'
 import React from 'react';
 import profilePic from '../Assets/patrick-stella.jpg'
 import { Link } from "react-router-dom"
@@ -9,17 +9,21 @@ import { Link } from "react-router-dom"
 
 export function Home() {
     return(
-        <body>
+        <div className="homepage">
             <section className="user-section">
                 <header>
                     <img src={profilePic} alt="profile"/>
                     <span>Username</span>
                 </header>
                 <Link to='/home'>Home</Link>
-
+                <Link to='/liste'>Liste</Link>
             </section>
-            <section className="view"></section>
-        </body>
+            <section className="view">
+                <header>
+                    <span>Quale viaggio organizzeremo oggi?</span>
+                    <button>+</button>
+                </header>
+            </section>
+        </div>
     )
 }
-
