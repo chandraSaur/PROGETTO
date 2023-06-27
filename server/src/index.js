@@ -60,11 +60,13 @@ app.post('/login', async (req, res) => {
   }
 }) 
 
+
+
 app.get('/logout',(req,res) => {
   req.session.destroy();
   res.redirect('/');
 });
-
+//fare la chiamata per la logout lato client
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

@@ -13,7 +13,7 @@ export function Home() {
             <section className="user-section">
                 <header>
                     <img src={profilePic} alt="profile"/>
-                    <span>Username</span>
+                    <span>Patrick098</span>
                 </header>
                 <Link to='/home'>Home</Link>
                 <Link to='/liste'>Liste</Link>
