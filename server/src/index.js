@@ -2,7 +2,7 @@ import express from 'express'
 import session from 'express-session'
 import cookieParser from 'cookie-parser' //Cookie-parser - used to parse cookie header to store data on the browser whenever a session is established on the server-side.
 import 'dotenv/config'
-import {runConnection, insertUser, findUser} from './woanderDB.mjs'
+import {runConnection, insertUser, findUser, insertTrip, findTrips} from './woanderDB.mjs'
 import cors from 'cors';
 
 const app = express()
@@ -60,7 +60,22 @@ app.post('/login', async (req, res) => {
   }
 }) 
 
+app.post('/home/trip', async (req, res) => {
+  const trip = req.body;
+  let resultPromise = await insertTrip(trip)
 
+  if (await resultPromise == 11000){
+    res.status(409).send('Nome già utilizzato');
+  } else {
+      res
+        .status(201)
+        .send('Il viaggio è stato inserito correttamente')
+  }
+})  
+
+app.get('/home/trips', async(req,res) => {
+  res.json(await findTrips())
+});
 
 app.get('/logout',(req,res) => {
   req.session.destroy();

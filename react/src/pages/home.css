@@ -1,31 +1,51 @@
 img {
-    width: 80px;
-    border-radius: 50px;
+  width: 80px;
+  border-radius: 50px;
 }
 
 .homepage {
-    display: flex;
-    margin: 0;
-    padding: 0;
+  display: flex;
+  margin: 0;
+  padding: 0;
   }
 
+
+.user-section, .view {
+  display: flex;
+  flex-direction: column;
+
+}
 .user-section {
-    flex-basis: 25%;
-    display: flex;
-    flex-direction: column;
-    border-right: 1px solid black;
-    padding-top: 10px;
+  flex-basis: 15%;
+  border-right: 1px solid black;
+  padding: 30px 30px 0;
   }
 
 .view {
-    flex-basis: 75%;
-    display: flex;
-    flex-direction: column;
-    padding-top: 80px;
-    margin-right: 50px;
+  flex-basis: 85%;
+  padding: 80px 0 0 80px;
+  margin-right: 50px;
 }
-header{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+.user-section header{
+  background-color: rgb(236, 236, 236);
+  border-radius: 20px;
+  border: 1px solid rgb(162, 162, 162);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+header {
+  margin-bottom: 80px;
+  padding: 10px;
+}
+
+.openModalBtn{
+  background: linear-gradient(90deg, rgba(185,131,255,1) 1%, rgba(185,131,255,1) 15%, rgba(148,218,255,1) 100%);
+  border-radius: 30px;
+  border: none;
+  outline: none;
+  font-size: 40px;
+  width: 200px;
+  height: 200px;
 }

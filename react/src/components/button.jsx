@@ -6,8 +6,8 @@ export function LogSigButton({url, name}) {
     )
   }
 
-export function ButtonGradient({name, onClick}){
+export function ButtonGradient({name, onClick, value}){
     return(
-        <button className="gradientButton" onClick={onClick}>{name}</button>
+        <button value={value} className="gradientButton" onClick={onClick}>{name}</button>
     )
 }

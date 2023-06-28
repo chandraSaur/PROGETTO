@@ -9,8 +9,6 @@ import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 
 import { LogSigButton, ButtonGradient } from '../components/button';
-import { Input } from '../components/input';
-
 
 export function Welcome (){
     return (
@@ -79,9 +77,9 @@ export function Signup (){
                     <section className="container">
                         <img src={logo} alt="logo"/>
                         <form onSubmit={handleSubmit}>
-                            <Input value={email} onChange={handleEmail} placeholder="email"/>
-                            <Input value={username} onChange={handleUsername} placeholder="username"/>
-                            <Input type="password" value={password} onChange={handlePassword} placeholder="password"/>
+                            <input value={email} onChange={handleEmail} placeholder="email"/>
+                            <input value={username} onChange={handleUsername} placeholder="username"/>
+                            <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
                             <ButtonGradient name="Signup"/>
                         </form>
                         <p className={error ? "error" : "invisibile"}>{error}</p>
@@ -110,7 +108,7 @@ export function Signup (){
 
     const handleLogin = async (e) => {
         e.preventDefault()
-        if (username === '' || password === '') {
+        if (!username || !password) {
             setError('Inserisci tutti i campi');
         } else {
             setError('');            

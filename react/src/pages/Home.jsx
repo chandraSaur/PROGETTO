@@ -1,10 +1,9 @@
 import {useState, useEffect} from "react"
+import axios from 'axios'
 import './home.css'
-import React from 'react';
 import profilePic from '../Assets/patrick-stella.jpg'
 import { Link } from "react-router-dom"
 import  Modal from "./modal"
-import { ButtonGradient } from '../components/button';
 
 
 //l'indirizzo di questa pagina è: http://localhost:3000/home
@@ -12,6 +11,22 @@ import { ButtonGradient } from '../components/button';
 export function Home() {
 
     const [openModal, setOpenModal] = useState(false)
+    const [trips, setTrips] = useState([])
+
+
+    useEffect(() => {
+        async function tripsCall(){
+            const res = await axios.get('http://localhost:8000/home/trips')
+            const tripNames = [];
+            for (let i = 0; i < res.data.length; i++) {
+            const trip = res.data[i];
+            const tripName = trip.tripName;
+            tripNames.push(tripName);
+            }
+            setTrips(tripNames)
+        }
+        tripsCall()
+    }, [])
 
     return(
         <div className="homepage">
@@ -26,8 +41,15 @@ export function Home() {
             <section className="view">
                 <header>
                     <span>Quale viaggio organizzeremo oggi?</span>
-                    <ButtonGradient className="openModalBtn" name="+" onClick={() => {setOpenModal(true)}}/>
                 </header>
+                <ul>
+                    {
+                        trips.map((t,i) =>
+                            <li key={i}>{t}</li>
+                        )
+                    }
+                </ul>
+                <button className="openModalBtn" onClick={() => {setOpenModal(true)}}>+</button>
             </section>
             {openModal && <Modal closeModal={setOpenModal}/>}
         </div>

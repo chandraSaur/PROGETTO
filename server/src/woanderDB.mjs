@@ -68,4 +68,18 @@ export async function insertTrip(trip) {
         await client.close();
     }
   }
+
+  export async function findTrips() {
+    try {
+      await client.connect()
+      const database = client.db(process.env.NAME_DB);  
+      const tripsCollection = database.collection("trips");  
+      let foundTrips = await tripsCollection.find().toArray()
+      return foundTrips
+    }catch(err) {
+        console.log(err);
+    }finally {
+        await client.close();
+    }
+  }
   

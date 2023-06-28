@@ -18,7 +18,6 @@ img {
 }
 
 .gradientButton {
-    background: rgb(185,131,255);
     background: linear-gradient(90deg, rgba(185,131,255,1) 1%, rgba(185,131,255,1) 15%, rgba(148,218,255,1) 100%);
     border-radius: 30px;
     padding: 10px;
