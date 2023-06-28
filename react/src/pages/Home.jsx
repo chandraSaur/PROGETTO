@@ -3,11 +3,16 @@ import './home.css'
 import React from 'react';
 import profilePic from '../Assets/patrick-stella.jpg'
 import { Link } from "react-router-dom"
+import  Modal from "./modal"
+import { ButtonGradient } from '../components/button';
 
 
 //l'indirizzo di questa pagina è: http://localhost:3000/home
 
 export function Home() {
+
+    const [openModal, setOpenModal] = useState(false)
+
     return(
         <div className="homepage">
             <section className="user-section">
@@ -21,9 +26,12 @@ export function Home() {
             <section className="view">
                 <header>
                     <span>Quale viaggio organizzeremo oggi?</span>
-                    <button>+</button>
+                    <ButtonGradient className="openModalBtn" name="+" onClick={() => {setOpenModal(true)}}/>
                 </header>
             </section>
+            {openModal && <Modal closeModal={setOpenModal}/>}
         </div>
     )
 }
+
+

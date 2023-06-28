@@ -1,3 +1,4 @@
+import React from 'react';
 import {useState, useEffect} from "react"
 import './log-sig.css'
 import './welcome.css'
@@ -6,6 +7,10 @@ import logo from '../Assets/Woanderlist_Logo.png'
 import axios from 'axios'
 import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
+
+import { LogSigButton, ButtonGradient } from '../components/button';
+import { Input } from '../components/input';
+
 
 export function Welcome (){
     return (
@@ -22,11 +27,6 @@ export function Welcome (){
     )
   }
   
-  function LogSigButton({url, name}) {
-    return(
-        <Link to={url}>{name}</Link>
-    )
-  }
 
 export function Signup (){
     const [email, setEmail] = useState ('');
@@ -79,10 +79,10 @@ export function Signup (){
                     <section className="container">
                         <img src={logo} alt="logo"/>
                         <form onSubmit={handleSubmit}>
-                            <input value={email} onChange={handleEmail} placeholder="email"/>
-                            <input value={username} onChange={handleUsername} placeholder="username"/>
-                            <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
-                            <button>Signup</button>
+                            <Input value={email} onChange={handleEmail} placeholder="email"/>
+                            <Input value={username} onChange={handleUsername} placeholder="username"/>
+                            <Input type="password" value={password} onChange={handlePassword} placeholder="password"/>
+                            <ButtonGradient name="Signup"/>
                         </form>
                         <p className={error ? "error" : "invisibile"}>{error}</p>
                     </section>
@@ -132,7 +132,7 @@ export function Signup (){
                 <form onSubmit={handleLogin}>
                     <input value={username} onChange={handleUsername} placeholder="username"/>
                     <input type="password" value={password} onChange={handlePassword} placeholder="password"/>
-                    <button>Login</button>
+                    <ButtonGradient name="Login"/>
                 </form>
                 <p className={error ? "error" : "invisibile"}>{error}</p>
             </section>
