@@ -35,7 +35,14 @@ export function Home() {
                     <img src={profilePic} alt="profile"/>
                     <span>Patrick098</span>
                 </header>
-                <Link to='/home'>Home</Link>
+                <details>
+                    <summary><Link to='/home'>Home</Link></summary>
+                    {
+                        trips.map((t) =>
+                            <li><Link>{t}</Link></li>
+                        )
+                    }
+                </details>
                 <Link to='/liste'>Liste</Link>
             </section>
             <section className="view">
