@@ -32,7 +32,7 @@ export function Home() {
         <div className="homepage">
             <section className="user-section">
                 <header>
-                    <img src={profilePic} alt="profile"/>
+                    <img className="profilePic" src={profilePic} alt="profile"/>
                     <span>Patrick098</span>
                 </header>
                 <details>

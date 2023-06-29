@@ -1,6 +1,5 @@
 import React from 'react';
 import {useState, useEffect} from "react"
-import './log-sig.css'
 import './welcome.css'
 
 import logo from '../Assets/Woanderlist_Logo.png'
