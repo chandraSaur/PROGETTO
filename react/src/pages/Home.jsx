@@ -1,18 +1,17 @@
-import {useState, useEffect} from "react"
-import axios from 'axios'
 import './home.css'
 import profilePic from '../Assets/patrick-stella.jpg'
+import logo from '../Assets/Woanderlist_Logo.png'
+import {useState, useEffect} from "react"
 import { Link } from "react-router-dom"
+import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faGears } from '@fortawesome/free-solid-svg-icons'
 import  Modal from "./modal"
-
-
-//l'indirizzo di questa pagina è: http://localhost:3000/home
 
 export function Home() {
 
     const [openModal, setOpenModal] = useState(false)
     const [trips, setTrips] = useState([])
-
 
     useEffect(() => {
         async function tripsCall(){
@@ -29,37 +28,47 @@ export function Home() {
     }, [])
 
     return(
-        <div className="homepage">
-            <section className="user-section">
-                <header>
-                    <img className="profilePic" src={profilePic} alt="profile"/>
-                    <span>Patrick098</span>
-                </header>
-                <details>
-                    <summary><Link to='/home'>Home</Link></summary>
-                    {
+        <main className="homepage">
+            <header>
+                <img className="logo" src={logo} alt="logo"/>
+                <img className="profilePic" src={profilePic} alt="profile"/>
+            </header>
+            <section className="mainInterface">
+                <section className="linkSection">
+                    <h3>MAIN</h3>
+                    <nav>
+                        <Link to='/home'>Home</Link>
+                    </nav>
+                    <h3>TRIPS</h3>
+                    <nav>
+                        {
                         trips.map((t) =>
-                            <li><Link>{t}</Link></li>
+                            <div><Link to={`/${t}`} >{t}</Link></div>
                         )
-                    }
-                </details>
-                <Link to='/liste'>Liste</Link>
-            </section>
-            <section className="view">
-                <header>
-                    <span>Quale viaggio organizzeremo oggi?</span>
-                </header>
-                <ul>
-                    {
-                        trips.map((t,i) =>
-                            <li key={i}>{t}</li>
-                        )
-                    }
-                </ul>
-                <button className="openModalBtn" onClick={() => {setOpenModal(true)}}>+</button>
-            </section>
-            {openModal && <Modal closeModal={setOpenModal}/>}
-        </div>
+                        }
+                    </nav> 
+                <footer>
+                    <FontAwesomeIcon id='faGears' icon={faGears} />
+                    <Link to='/help'>Help & Support</Link>
+                </footer>
+                </section>
+                <section className="tripCards">
+                    <div>
+                        <h1>Home</h1>
+                        <span>Quale viaggio organizzeremo oggi?</span>
+                    </div>
+                    <article>
+                        {
+                            trips.map((t) =>
+                                <div name={t}></div>
+                            )
+                        }
+                    </article>
+                    <button className="openModalBtn" onClick={() => {setOpenModal(true)}}><FontAwesomeIcon id='faPlus' icon={faPlus} /></button>
+                </section>
+            </section>            
+{openModal && <Modal closeModal={setOpenModal}/>}
+        </main>
     )
 }
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-export function tripCard() {
+export function tripCard({name}) {
     return(
-        <div></div>
+        <div>{name}</div>
     )
   }
