@@ -9,8 +9,6 @@ import { faPlus, faGears, faTrash} from '@fortawesome/free-solid-svg-icons'
 import  Modal from "./modal"
 import { TripCard } from '../components/cards'
 
-
-
 export function Home() {
       
     const [trips, setTrips] = useState([])
@@ -39,7 +37,7 @@ export function Home() {
         
     return(
         <main className="homepage">
-            <header>
+            <header className='fixedHeader'>
                 <img className="logo" src={logo} alt="logo"/>   
                 <div className='newTripBtn'>
                     <span>Quale viaggio organizzeremo oggi?</span>
@@ -54,7 +52,7 @@ export function Home() {
                         <Link to='/home'>Home</Link>
                     </nav>
                     <h3>TRIPS</h3>
-                    <nav>
+                    <nav className='tripBar'>
                         {
                         trips.map((t, i) =>
                             <div>

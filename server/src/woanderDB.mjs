@@ -76,7 +76,7 @@ export async function insertTrip(trip) {
         const elementCollection = database.collection("trips");
         const result = await elementCollection.updateOne(
         { tripName: elementName },
-        { $push: { elements: [newElement] }}
+        { $push: { elements: newElement }}
         )
       } catch (err) {
           return(err.code)
