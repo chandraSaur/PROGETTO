@@ -5,13 +5,17 @@ import {useState, useEffect} from "react"
 import { Link } from "react-router-dom"
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faGears } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faGears, faTrash} from '@fortawesome/free-solid-svg-icons'
 import  Modal from "./modal"
 import { TripCard } from '../components/cards'
 
-export function useTrips(){
-    const [trips, setTrips] = useState([])
 
+
+export function Home() {
+      
+    const [trips, setTrips] = useState([])
+    const [openModal, setOpenModal] = useState(false)
+    
     useEffect(() => {
         async function tripsCall(){
             const res = await axios.get('http://localhost:8000/home/trips')
@@ -24,15 +28,15 @@ export function useTrips(){
         }
         tripsCall()
     }, [])
-    return trips
-}
-
-export function Home() {
-
-    const trips = useTrips()
-    console.log(trips);
-    const [openModal, setOpenModal] = useState(false)
-
+        
+    async function handleDeleteTrip(i){
+        let tripDeleted = trips[i]
+        const res = await axios.delete(`http://localhost:8000/home/${tripDeleted.tripName}`)
+        const newTrips = [...trips];
+        newTrips.splice(i, 1)
+        setTrips(newTrips)
+    }
+        
     return(
         <main className="homepage">
             <header>
@@ -52,8 +56,11 @@ export function Home() {
                     <h3>TRIPS</h3>
                     <nav>
                         {
-                        trips.map((t) =>
-                            <div><Link to={`/${t.tripName}`} >{t.tripName}</Link></div>
+                        trips.map((t, i) =>
+                            <div>
+                                <Link key={i} to={`/${t.tripName}`} >{t.tripName}</Link>
+                                <button onClick={()=>handleDeleteTrip(i)}><FontAwesomeIcon id='faTrash' icon={faTrash} /></button>
+                            </div>
                         )
                         }
                     </nav> 
@@ -65,7 +72,6 @@ export function Home() {
                 <section className="viewCards">
                     <div>
                         <h1>Home</h1>
-                        <span></span>
                     </div>
                     <main>
                         {
@@ -76,7 +82,7 @@ export function Home() {
                     </main>
                 </section>
             </section>            
-{openModal && <Modal closeModal={setOpenModal}/>}
+        {openModal && <Modal closeModal={setOpenModal} addTrips={setTrips} arrayTrips={trips}/>}
         </main>
     )
 }

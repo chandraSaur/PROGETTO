@@ -11,8 +11,10 @@ export function TripCard({name, from, to, elements}) {
     const elementBody = { item, quantity };    //questi sono gli useState. Un oggetto con chiave e valore uguali {item:item, quantity:quantity} lo puoi scrivere come {item, quantity}
 
     const handleItems = async () => {
-        const res = await axios.put(`http://localhost:8000/home/${elementName.name}`, elementBody   //passo il nome perchè è ciò che mi indica univocamente il documento es. Bali. passo element body perchè è ciò che voglio inserire nell'array element del documento con quel nome es. sempre Bali. 
-    )};
+        const res = await axios.put(`http://localhost:8000/home/${elementName.name}`, elementBody)   //passo il nome perchè è ciò che mi indica univocamente il documento es. Bali. passo element body perchè è ciò che voglio inserire nell'array element del documento con quel nome es. sempre Bali. 
+        setItem("")
+        setQuantity("")
+        };
 
     return(
         <div className="card">
