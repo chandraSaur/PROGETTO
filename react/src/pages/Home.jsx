@@ -55,8 +55,8 @@ export function Home() {
                     <nav className='tripBar'>
                         {
                         trips.map((t, i) =>
-                            <div>
-                                <Link key={i} to={`/${t.tripName}`} >{t.tripName}</Link>
+                            <div key={i}>
+                                <Link to={`/${t.tripName}`} >{t.tripName}</Link>
                                 <button onClick={()=>handleDeleteTrip(i)}><FontAwesomeIcon id='faTrash' icon={faTrash} /></button>
                             </div>
                         )
