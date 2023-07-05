@@ -19,19 +19,24 @@ export function TripCard({name, from, to, elements}) {
     }, [elements]);
   
     const handleItems = async () => {
-      try {
-        const res = await axios.put(`http://localhost:8000/home/${name}`, {
-          item,
-          quantity,
-        });
-        if (res.status === 201) {
-          const newItem = { item, quantity };
-          setAddedElements([...addedElements, newItem]);
-          setItem('');
-          setQuantity('1');
+      if (item !== "" && quantity !== "") {
+        setError("")
+        try {
+          const res = await axios.put(`http://localhost:8000/home/${name}`, {
+            item,
+            quantity,
+          });
+          if (res.status === 201) {
+            const newItem = { item, quantity };
+            setAddedElements([...addedElements, newItem]);
+            setItem('');
+            setQuantity('1');
+          }
+        } catch (error) {
+          console.error(error);
         }
-      } catch (error) {
-        console.error(error);
+      } else {
+        setError('Inserisci tutti i campi')
       }
     };
 
@@ -69,8 +74,8 @@ export function TripCard({name, from, to, elements}) {
                     <input value={item} onChange={(e) => setItem(e.target.value)}></input>
                     <input type="number" className="listInput" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
                     <button className="openModalBtn" onClick={handleItems}><FontAwesomeIcon id='faPlus' icon={faPlus} /></button>
-                    <p className={error ? "error" : "invisibile"}>{error}</p>
                 </div>
+                <p className={error ? "error" : "invisibile"}>{error}</p>
             </main>
             <section className="scrollableSection">
                 <ul>
