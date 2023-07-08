@@ -1,13 +1,11 @@
-import {useState, useEffect} from "react"
 import axios from 'axios';
+import {useState, useEffect} from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus, faTrash, faCheck, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
+import { faPlus, faTrash, faCheck, faPen } from '@fortawesome/free-solid-svg-icons'
 
-export function TripCard({name, from, to, elements, id}) {
+export default function TripCard({name, from, to, elements, id}) {
 
   const [errorPost, setErrorPost] = useState('');
-  const [error, setError] = useState('')
-
 
   const [item, setItem] = useState("")
   const [quantity, setQuantity] = useState('1');
@@ -15,8 +13,7 @@ export function TripCard({name, from, to, elements, id}) {
 
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedItem, setEditedItem] = useState("");  //nuovi valori
-  const [editedQuantity, setEditedQuantity] = useState("1"); //nuovi valori
-
+  const [editedQuantity, setEditedQuantity] = useState(""); //nuovi valori
   const [oldItem, setOldItem] = useState("");  //vecchi valori
   const [oldQuantity, setOldQuantity] = useState(""); //vecchi valori
 
@@ -25,7 +22,7 @@ export function TripCard({name, from, to, elements, id}) {
   }, [elements]);
 
   const handleItems = async () => {
-    if (item !== "" && quantity !== "") {
+    if (item && quantity) {
       setErrorPost("")
       try {
         const res = await axios.put(`http://localhost:8000/home/${name}`, {
@@ -66,8 +63,7 @@ export function TripCard({name, from, to, elements, id}) {
 // il nuovo 1 non è quello precedente. Si crea direttamente una copia del vecchio array aggiungendo al posto del precedente lasciato fuori dalla copia effettuata con slice quello nuovo che vogliamo.
 
   async function handleSaveChanges(i) {  
-    if (editedItem !== "" && editedQuantity !== "") {
-      setError("")
+    if (editedItem && editedQuantity) {
       try {
         const res = await axios.put(`http://localhost:8000/home/${name}/elements/${oldItem}/${oldQuantity}`, {
           item: editedItem,
@@ -88,7 +84,7 @@ export function TripCard({name, from, to, elements, id}) {
           setOldQuantity("")
         }
       } catch (error) {
-          console.error(error);
+        console.error(error);
       }
     } else {
       setEditingIndex(null)
@@ -130,13 +126,10 @@ export function TripCard({name, from, to, elements, id}) {
                 <li key={i} className="elementList">
                   <div>
                     {editingIndex === i ? (
-                    <>
                       <section className="inputSection">
                         <input value={editedItem} onChange={(e) => setEditedItem(e.target.value)} placeholder={oldItem}/>
-                        <input type="number" className="listInput" value={editedQuantity} onChange={(e) => setEditedQuantity(e.target.value)}/>
+                        <input type="number" className="listInput" value={editedQuantity} onChange={(e) => setEditedQuantity(e.target.value)} placeholder={oldQuantity}/>
                       </section>
-                      <p className={error ? "error" : "invisibile"}>{error}</p>
-                    </>
                     ) : (
                     <section className="inputSection">
                       <span>{el.item}</span> 
@@ -149,7 +142,7 @@ export function TripCard({name, from, to, elements, id}) {
                     {editingIndex === i ? (
                       <FontAwesomeIcon id='faCheck' icon={faCheck} onClick={() => handleSaveChanges(i)} />
                     ) : (
-                      <FontAwesomeIcon id="faPen" icon={faPenToSquare} onClick={() => handleEditElement(i, el.item, el.quantity)}/>
+                      <FontAwesomeIcon id="faPen" icon={faPen} onClick={() => handleEditElement(i, el.item, el.quantity)}/>
                     )}
                   </div>
                 </li>

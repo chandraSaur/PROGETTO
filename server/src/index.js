@@ -1,9 +1,9 @@
 import express from 'express'
 import session from 'express-session'
 import cookieParser from 'cookie-parser' //Cookie-parser - used to parse cookie header to store data on the browser whenever a session is established on the server-side.
-import 'dotenv/config'
-import {runConnection, insertUser, findUser, insertTrip, findTrips, insertElement, deleteTrips, deleteElement, editElement} from './woanderDB.mjs'
 import cors from 'cors';  
+import 'dotenv/config'
+import {runConnection, insertUser, findUser, insertTrip, findTrips, insertElement, deleteTrips, deleteElement, editElement, editTrip} from './woanderDB.mjs'
 
 const app = express()
 const port = 8000
@@ -35,9 +35,9 @@ app.post('/signup', async (req, res) => {
   if (await resultPromise == 11000){
     res.status(409).send('Username non disponibile');
   } else {
-      res
-        .status(201)
-        .send('Lo user è stato creato correttamente')
+    res
+      .status(201)
+      .send('Lo user è stato creato correttamente')
   }
   }) 
 
@@ -49,11 +49,9 @@ app.post('/login', async (req, res) => {
     if (resultPromise.username == user.username && resultPromise.password == user.password){
       req.session.userid = req.body.username  
       console.log(req.session);
-         res
-            .status(201)
-            .send({
-              message: 'user authenticated'
-         })
+        res
+          .status(201)
+          .send({message: 'user authenticated'})
     }
   } catch (error) {
     res.status(403).send(`Invalid username or password`);
@@ -63,13 +61,12 @@ app.post('/login', async (req, res) => {
 app.post('/home/trip', async (req, res) => {
   const trip = req.body;
   let resultPromise = await insertTrip(trip)
-
   if (await resultPromise == 11000){
     res.status(409).send('Nome già utilizzato');
   } else {
-      res
-        .status(201)
-        .send('Il viaggio è stato inserito correttamente')
+    res
+      .status(201)
+      .send('Il viaggio è stato inserito correttamente')
   }
 })  
 
@@ -85,8 +82,16 @@ app.put('/home/:name/elements/:oldItem/:oldQuantity', async (req,res) =>{
   const oldItem = req.params.oldItem
   const oldQuantity = req.params.oldQuantity
   const newElement = req.body; //recupero edited item e edited quantity 
-
   let result = await editElement(elementName, oldItem, oldQuantity, newElement)
+  res.status(201).end()
+})
+
+app.put('/home/edit/:name', async (req, res) =>{
+  const oldTripName = req.params.name
+  const newTrip = req.body
+  console.log('sono oldtripname '+ oldTripName)
+  console.log('sono newtrip '+ JSON.stringify(newTrip))
+  let result = await editTrip (oldTripName, newTrip)
   res.status(201).end()
 })
 
@@ -110,7 +115,6 @@ app.delete('/home/:name/elements/:deletedItem/:deletedQuantity', async (req, res
   const name = req.params.name
   const deletedItem = req.params.deletedItem
   const deletedQuantity = req.params.deletedQuantity
-
   let result = await deleteElement(name, deletedItem, deletedQuantity )
   res.status(201).end()
 })
