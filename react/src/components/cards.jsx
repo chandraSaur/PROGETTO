@@ -114,7 +114,7 @@ export default function TripCard({name, from, to, elements, id}) {
         </header>
         <main>
             <div> 
-                <input value={item} onChange={(e) => setItem(e.target.value)}></input>
+                <input value={item} onChange={(e) => setItem(e.target.value)} placeholder="Di cosa avrai bisogno?"></input>
                 <input type="number" className="listInput" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
                 <button className="openModalBtn" onClick={handleItems}><FontAwesomeIcon id='faPlus' icon={faPlus} /></button>
             </div>

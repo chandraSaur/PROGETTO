@@ -53,6 +53,14 @@
 	cursor: pointer;
 }
 
+.dialogContainer {
+	margin: 0 20px;
+	position: fixed;
+	top: 150px;
+	left:250px;
+	padding: 10px 30px 30px;
+}
+
 #faXMark {
 	padding: 5px;
 	border-radius: 50px;
@@ -61,13 +69,3 @@
 #faXMark:hover {
 	background: var(--bgGrad);
 }
-
-.dialogContainer {
-	margin: 0 20px;
-	position: fixed;
-	top: 200px;
-	left:250px;
-	padding: 10px 30px 30px;
-}
-
-

@@ -57,10 +57,10 @@ export default function Home() {
       <header className='fixedHeader'>
         <img className="logo" src={logo} alt="logo"/>   
         <div className='newTripBtn'>
-          <span>Quale viaggio organizzeremo oggi?</span>
           <button className="openModalBtn" onClick={() => {setOpenModal(true)}}>
             <FontAwesomeIcon id='faPlus' icon={faPlus}/>
           </button>
+          <span>Quale viaggio organizzeremo oggi?</span>
         </div>                 
         <img className="profilePic" src={profilePic} alt="profile"/>
       </header>

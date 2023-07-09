@@ -16,7 +16,7 @@ export default function Dialog ({closeDialog, arrayTrips, oldTripName}){
 
   const handleModify = async (e) => {
     e.preventDefault()
-    if (newTripName==='' && newTo === "" && newFrom === "") {
+    if (!newTripName || !newTo || !newFrom) {
       setError(`Inserisci tutti i campi!`);
     } else {
       setError('');    
@@ -25,7 +25,7 @@ export default function Dialog ({closeDialog, arrayTrips, oldTripName}){
         {tripName : newTripName, from : newFrom, to : newTo}); 
           if(res.status === 201){
             closeDialog(false);
-            navigate('/home')
+            window.location.reload();  //riaggiorna la pagina (dato che non sono riuscita in ALCUN MODO nonostante 3 ore di prove a far aggiornare da solo l'array trips nel componente Home)
           }
       } catch(error){
         console.error(error)
@@ -39,6 +39,7 @@ export default function Dialog ({closeDialog, arrayTrips, oldTripName}){
         </div>                
         <form onSubmit={handleModify}>
           <h2>Modifica il tuo viaggio</h2>
+          <span className={error ? "error" : "invisibile"}>{error}</span>
           <input value={newTripName} onChange={(e) => setNewTripName(e.target.value)} placeholder="Dove vuoi andare?"/>
             <section className='date'>
               <label htmlFor="dal">Dal:</label>
@@ -48,7 +49,6 @@ export default function Dialog ({closeDialog, arrayTrips, oldTripName}){
             </section>
             <ButtonGradient name="Modifica"/>
         </form>
-        <p className={error ? "error" : "invisibile"}>{error}</p>
       </section>
   )
 }
