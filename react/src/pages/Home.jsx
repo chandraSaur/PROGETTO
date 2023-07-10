@@ -63,7 +63,7 @@ export default function Home() {
           <button className="openModalBtn" onClick={() => {setOpenModal(true)}}>
             <FontAwesomeIcon id='faPlus' icon={faPlus}/>
           </button>
-          <span>Quale viaggio organizzeremo oggi?</span>
+          <span>Organizza subito il tuo viaggio! </span>
         </div>                 
         <img className="profilePic" src={profilePic} alt="profile"/>
       </header>
@@ -91,7 +91,7 @@ export default function Home() {
           </section>
           <section className="viewCards">
             <div>
-              <h1 id='home' className='marginScroll'>Home</h1>
+              <h1 id='home' className='marginScroll'>Le tue liste</h1>
             </div>
             <main>
               { trips.map((t) =>
