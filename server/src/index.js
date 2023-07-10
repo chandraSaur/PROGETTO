@@ -1,6 +1,6 @@
 import express from 'express'
 import session from 'express-session'
-import cookieParser from 'cookie-parser' //Cookie-parser - used to parse cookie header to store data on the browser whenever a session is established on the server-side.
+import cookieParser from 'cookie-parser' 
 import cors from 'cors';  
 import 'dotenv/config'
 import {runConnection, insertUser, findUser, insertTrip, findTrips, insertElement, deleteTrips, deleteElement, editElement, editTrip} from './woanderDB.mjs'
@@ -11,18 +11,14 @@ const port = 8000
 import bodyParser from 'body-parser'
 app.use(bodyParser.json())
 app.use(cors());
-app.use(cookieParser());  //permette al server di salvare, leggere e avere accesso al cookie
+app.use(cookieParser()); 
 
 
-//Si ha la necessità di utilizzare i cookie: ogni volta che il client
-//effettuerà una chiamata, dovrà inviare anche i cookie che permettono
-//al server di capire che quel determinato utente è in sessione (dopo il login)
-//session middleware
 const oneDay = 1000 * 60 * 60 * 24;
 app.use(session({
-    secret: process.env.SECRETKEY_SESSION,  //stringa per autenticare la sessione
+    secret: process.env.SECRETKEY_SESSION,  
     saveUninitialized:true, 
-    cookie: { maxAge: oneDay }, //tempo attivazione cookie. Dopodichè non sarà più inviato. 
+    cookie: { maxAge: oneDay },  
     resave: false 
 }));
 
@@ -68,9 +64,9 @@ app.post('/home/trip', async (req, res) => {
   }
 })  
 
-app.put('/home/:name', async (req,res) => {  //passo anche all'URL la variabile
-  const elementName = req.params.name; //recupero name: Bali
-  const newElement = req.body; // recupero element {'item':'spazzolino', 'quantity':'2'}
+app.put('/home/:name', async (req,res) => {  
+  const elementName = req.params.name; 
+  const newElement = req.body; 
   let result = await insertElement(elementName, newElement)
   res.status(201).end()
 })
@@ -79,7 +75,7 @@ app.put('/home/:name/elements/:oldItem/:oldQuantity', async (req,res) =>{
   const elementName = req.params.name
   const oldItem = req.params.oldItem
   const oldQuantity = req.params.oldQuantity
-  const newElement = req.body; //recupero edited item e edited quantity 
+  const newElement = req.body; 
   let result = await editElement(elementName, oldItem, oldQuantity, newElement)
   res.status(201).end()
 })

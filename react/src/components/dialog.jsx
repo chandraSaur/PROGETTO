@@ -25,7 +25,7 @@ export default function Dialog ({closeDialog, arrayTrips, oldTripName}){
         {tripName : newTripName, from : newFrom, to : newTo}); 
           if(res.status === 201){
             closeDialog(false);
-            window.location.reload();  //riaggiorna la pagina (dato che non sono riuscita in ALCUN MODO nonostante 3 ore di prove a far aggiornare da solo l'array trips nel componente Home)
+            window.location.reload();
           }
       } catch(error){
         console.error(error)

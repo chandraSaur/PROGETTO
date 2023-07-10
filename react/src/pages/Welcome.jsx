@@ -28,7 +28,6 @@ export function Signup (){
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
-  //La funzione handleSubmit esegue la richiesta POST utilizzando Axios e gestisce la risposta o gli errori ottenuti. Non è necessario utilizzare useEffect perché la chiamata viene effettuata direttamente al momento del submit del form, senza bisogno di aspettare un evento specifico o un cambio di stato.
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!username || !email || !password ) {

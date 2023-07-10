@@ -23,7 +23,7 @@ body {
 }
 
 .marginScroll {
-  scroll-margin-top: 150px; /*quando schiaccio l'anchor, l'elemento è posizionato a 150 px dal margine superiore. Serve avendo l'header fixed*/
+  scroll-margin-top: 150px; 
 }
 
 .homepage {

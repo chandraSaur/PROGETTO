@@ -12,10 +12,10 @@ export default function TripCard({name, from, to, elements, id}) {
   const [addedElements, setAddedElements] = useState([]);
 
   const [editingIndex, setEditingIndex] = useState(null);
-  const [editedItem, setEditedItem] = useState("");  //nuovi valori
-  const [editedQuantity, setEditedQuantity] = useState(""); //nuovi valori
-  const [oldItem, setOldItem] = useState("");  //vecchi valori
-  const [oldQuantity, setOldQuantity] = useState(""); //vecchi valori
+  const [editedItem, setEditedItem] = useState("");  
+  const [editedQuantity, setEditedQuantity] = useState(""); 
+  const [oldItem, setOldItem] = useState("");  
+  const [oldQuantity, setOldQuantity] = useState(""); 
 
   useEffect(() => {
     setAddedElements(elements);
@@ -57,11 +57,6 @@ export default function TripCard({name, from, to, elements, id}) {
     }
   }
 
-// i=1
-// [0, 1, 2, 3, 4, 5]
-// [0] [1] [2, 3, 4, 5]  
-// il nuovo 1 non è quello precedente. Si crea direttamente una copia del vecchio array aggiungendo al posto del precedente lasciato fuori dalla copia effettuata con slice quello nuovo che vogliamo.
-
   async function handleSaveChanges(i) {  
     if (editedItem && editedQuantity) {
       try {
@@ -72,9 +67,9 @@ export default function TripCard({name, from, to, elements, id}) {
         if(res.status === 201){
           const editedElement = {item:editedItem, quantity:editedQuantity}
           const newElement = [
-            ...addedElements.slice(0, i), // Gli elementi precedenti all'indice i
+            ...addedElements.slice(0, i), 
             editedElement,
-            ...addedElements.slice(i + 1) // Gli elementi successivi all'indice i
+            ...addedElements.slice(i + 1) 
           ];
           setAddedElements(newElement)
           setEditingIndex(null);
@@ -92,11 +87,11 @@ export default function TripCard({name, from, to, elements, id}) {
   }
 
   const handleEditElement = (index, item, quantity) => {
-    setEditingIndex(index); // indice di quello che stiamo modificando
-    setOldItem(item);  //ho quelli vecchi
-    setOldQuantity(quantity); //quantità vecchia
-    setEditedItem(item || ""); // imposta il valore corrente come valore predefinito, se presente
-    setEditedQuantity(quantity || "1"); // imposta il valore corrente come valore predefinito, se presente
+    setEditingIndex(index); 
+    setOldItem(item);  
+    setOldQuantity(quantity); 
+    setEditedItem(item || ""); 
+    setEditedQuantity(quantity || "1"); 
   };
 
   return(
