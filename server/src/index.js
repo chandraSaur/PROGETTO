@@ -17,8 +17,8 @@ app.use(cookieParser());  //permette al server di salvare, leggere e avere acces
 //Si ha la necessità di utilizzare i cookie: ogni volta che il client
 //effettuerà una chiamata, dovrà inviare anche i cookie che permettono
 //al server di capire che quel determinato utente è in sessione (dopo il login)
-const oneDay = 1000 * 60 * 60 * 24;
 //session middleware
+const oneDay = 1000 * 60 * 60 * 24;
 app.use(session({
     secret: process.env.SECRETKEY_SESSION,  //stringa per autenticare la sessione
     saveUninitialized:true, 
@@ -26,12 +26,11 @@ app.use(session({
     resave: false 
 }));
 
-runConnection()  //connect to DB
+runConnection() 
 
 app.post('/signup', async (req, res) => {
   const user = req.body;
   let resultPromise = await insertUser(user)
-
   if (await resultPromise == 11000){
     res.status(409).send('Username non disponibile');
   } else {
@@ -44,7 +43,6 @@ app.post('/signup', async (req, res) => {
 app.post('/login', async (req, res) => {
   const user = req.body;
   let resultPromise = await findUser(user)
-
   try {
     if (resultPromise.username == user.username && resultPromise.password == user.password){
       req.session.userid = req.body.username  
@@ -89,8 +87,6 @@ app.put('/home/:name/elements/:oldItem/:oldQuantity', async (req,res) =>{
 app.put('/home/edit/:name', async (req, res) =>{
   const oldTripName = req.params.name
   const newTrip = req.body
-  console.log('sono oldtripname '+ oldTripName)
-  console.log('sono newtrip '+ JSON.stringify(newTrip))
   let result = await editTrip (oldTripName, newTrip)
   res.status(201).end()
 })
@@ -98,12 +94,6 @@ app.put('/home/edit/:name', async (req, res) =>{
 app.get('/home/trips', async(req,res) => {
   res.json(await findTrips())
 });
-
-app.get('/logout',(req,res) => {
-  req.session.destroy();
-  res.redirect('/');
-});
-//fare la chiamata per la logout lato client
 
 app.delete('/home/:tripDeleted', async (req, res) =>{
   const tripDeleted = req.params.tripDeleted

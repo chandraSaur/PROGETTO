@@ -40,12 +40,12 @@ export default function Dialog ({closeDialog, arrayTrips, oldTripName}){
         <form onSubmit={handleModify}>
           <h2>Modifica il tuo viaggio</h2>
           <span className={error ? "error" : "invisibile"}>{error}</span>
-          <input value={newTripName} onChange={(e) => setNewTripName(e.target.value)} placeholder="Dove vuoi andare?"/>
+          <input className='coloredInput' value={newTripName} onChange={(e) => setNewTripName(e.target.value)} placeholder="Dove vuoi andare?"/>
             <section className='date'>
               <label htmlFor="dal">Dal:</label>
-              <input value={newFrom} onChange={(e) => setNewFrom(e.target.value)} type="date" name="dal" />
+              <input className='coloredInput' value={newFrom} onChange={(e) => setNewFrom(e.target.value)} type="date" name="dal" />
               <label htmlFor="al">Al:</label>
-              <input value={newTo} onChange={(e) => setNewTo(e.target.value)} type="date"/>
+              <input className='coloredInput' value={newTo} onChange={(e) => setNewTo(e.target.value)} type="date"/>
             </section>
             <ButtonGradient name="Modifica"/>
         </form>

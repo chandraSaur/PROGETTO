@@ -46,12 +46,12 @@ export default function Modal({closeModal, addTrips, arrayTrips}) {
 				</div>                
 				<span>Il tuo prossimo viaggio</span>
 				<form onSubmit={handleTrip}>
-					<input value={tripName} onChange={(e)=> setTripName(e.target.value)} placeholder="Dove vuoi andare?"/>
+					<input className='coloredInput' value={tripName} onChange={(e)=> setTripName(e.target.value)} placeholder="Dove vuoi andare?"/>
 					<section className='date'>
 						<label htmlFor="dal">Dal:</label>
-						<input value={from} onChange={(e)=> setFrom(e.target.value)} type="date" name="dal" />
+						<input className='coloredInput' value={from} onChange={(e)=> setFrom(e.target.value)} type="date" name="dal" />
 						<label htmlFor="al">Al:</label>
-						<input value={to} onChange={(e)=> setTo(e.target.value)} type="date"/>
+						<input className='coloredInput' value={to} onChange={(e)=> setTo(e.target.value)} type="date"/>
 					</section>
 					<ButtonGradient name="Crea"/>
 				</form>

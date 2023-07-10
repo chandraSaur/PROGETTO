@@ -47,6 +47,9 @@ export default function Home() {
     try{
       setOpenDialog(true);
       setEditTrip(trips[i].tripName)
+      if (openDialog) {
+        setOpenDialog(false)
+      }
     } catch(error){
         console.error(error)
     }
@@ -84,7 +87,6 @@ export default function Home() {
             </nav> 
             <footer>
               <FontAwesomeIcon id='faGears' icon={faGears} />
-              <Link to='/help'>Help & Support</Link>
             </footer>
           </section>
           <section className="viewCards">

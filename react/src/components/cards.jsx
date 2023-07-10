@@ -95,6 +95,8 @@ export default function TripCard({name, from, to, elements, id}) {
     setEditingIndex(index); // indice di quello che stiamo modificando
     setOldItem(item);  //ho quelli vecchi
     setOldQuantity(quantity); //quantità vecchia
+    setEditedItem(item || ""); // imposta il valore corrente come valore predefinito, se presente
+    setEditedQuantity(quantity || "1"); // imposta il valore corrente come valore predefinito, se presente
   };
 
   return(
@@ -114,8 +116,8 @@ export default function TripCard({name, from, to, elements, id}) {
         </header>
         <main>
             <div> 
-                <input value={item} onChange={(e) => setItem(e.target.value)} placeholder="Di cosa avrai bisogno?"></input>
-                <input type="number" className="listInput" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
+                <input className='coloredInput' value={item} onChange={(e) => setItem(e.target.value)} placeholder="Di cosa avrai bisogno?"></input>
+                <input className='coloredInput listInput' type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
                 <button className="openModalBtn" onClick={handleItems}><FontAwesomeIcon id='faPlus' icon={faPlus} /></button>
             </div>
             <p className={errorPost ? "error" : "invisibile"}>{errorPost}</p>
@@ -127,13 +129,16 @@ export default function TripCard({name, from, to, elements, id}) {
                   <div>
                     {editingIndex === i ? (
                       <section className="inputSection">
-                        <input value={editedItem} onChange={(e) => setEditedItem(e.target.value)} placeholder={oldItem}/>
-                        <input type="number" className="listInput" value={editedQuantity} onChange={(e) => setEditedQuantity(e.target.value)} placeholder={oldQuantity}/>
+                        <input className="coloredInput" value={editedItem} onChange={(e) => setEditedItem(e.target.value)} placeholder={oldItem}/>
+                        <input className='coloredInput listInput' type="number" value={editedQuantity} onChange={(e) => setEditedQuantity(e.target.value)} placeholder={oldQuantity}/>
                       </section>
                     ) : (
                     <section className="inputSection">
-                      <span>{el.item}</span> 
-                      <span>{el.quantity}</span>
+                      <input type="checkbox"/>
+                      <div className='elementsContainer'>
+                        <span>{el.item}</span> 
+                        <span>{el.quantity}</span>
+                      </div>
                     </section>
                     )}
                   </div>

@@ -27,12 +27,12 @@
   width: 400px;
 }
 
-.container p{
+.container p {
   padding: 0 70px;
   text-align: center;
 }
 
-.login-signup a, .gradientButton{
+.login-signup a, .gradientButton, .link {
   transition: transform 0.5s;
   border-radius: 30px;
   background: var(--bgGrad);
@@ -61,7 +61,7 @@
   width: 100px;
 }
 
-input {
+.coloredInput {
   height: 40px;
   border-radius: 8px;
   border: 2px solid var(--inputColor);
@@ -73,12 +73,12 @@ input {
 
 }
 
-input:focus {
+.coloredInput:focus {
   border-bottom: 4px solid var(--inputColor);
   padding-top: 2px;
 }
 
-input::placeholder {
+.coloredInput::placeholder {
   color: var(--inputColor);
   opacity: 0.5;
 }

@@ -20,8 +20,6 @@ export function Welcome (){
     </div>
   )
 }
-// 244 prima di sistemare display flex
-// 236 dopo
 
 export function Signup (){
   const [email, setEmail] = useState ('');
@@ -33,13 +31,13 @@ export function Signup (){
   //La funzione handleSubmit esegue la richiesta POST utilizzando Axios e gestisce la risposta o gli errori ottenuti. Non è necessario utilizzare useEffect perché la chiamata viene effettuata direttamente al momento del submit del form, senza bisogno di aspettare un evento specifico o un cambio di stato.
   const handleSubmit = async (e) => {
     e.preventDefault()
-    if (username === '' || email === '' || password === '') {
+    if (!username || !email || !password ) {
         setError('Inserisci tutti i campi');
     } else {
         setError('');            
         try {
           const res = await axios.post('http://localhost:8000/signup', 
-          { email,username,password });
+          { email, username, password });
           if (res.status === 201) {
             setSubmitted(true);
           } 
@@ -64,9 +62,9 @@ export function Signup (){
           <section className="container">
             <img src={logo} alt="logo"/>
             <form onSubmit={handleSubmit}>
-              <input value={email} onChange={(e) => {setEmail(e.target.value)}} placeholder="email"/>
-              <input value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="username"/>
-              <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="password"/>
+              <input className='coloredInput' value={email} onChange={(e) => {setEmail(e.target.value)}} placeholder="email"/>
+              <input className='coloredInput' value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="username"/>
+              <input className='coloredInput' type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} placeholder="password"/>
               <ButtonGradient name="Signup"/>
             </form>
             <p className={error ? "error" : "invisibile"}>{error}</p>
@@ -81,7 +79,6 @@ export function Login() {
   const [username, setUsername] = useState ('');
   const [password, setPassword] = useState ('');
   const [error, setError] = useState('');
-
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -107,8 +104,8 @@ export function Login() {
       <section className="container">
         <img src={logo} alt="logo"/>
         <form onSubmit={handleLogin}>
-          <input value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="username"/>
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password"/>
+          <input className='coloredInput' value={username} onChange={(e) => {setUsername(e.target.value)}} placeholder="username"/>
+          <input className='coloredInput' type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password"/>
           <ButtonGradient name="Login"/>
         </form>
         <p className={error ? "error" : "invisibile"}>{error}</p>
