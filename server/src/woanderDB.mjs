@@ -151,9 +151,9 @@ export async function editTrip(oldTripName, newTrip){
       { tripName: oldTripName },
       { $set: { tripName: newTrip.tripName, from: newTrip.from, to: newTrip.to } }
     )
-  } catch(err){
+  } catch(err) {
     return(err.code)
-  } finally{
+  } finally {
     await client.close();
   }
 }

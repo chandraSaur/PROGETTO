@@ -73,10 +73,6 @@ export default function TripCard({name, from, to, elements, id}) {
           ];
           setAddedElements(newElement)
           setEditingIndex(null);
-          setEditedItem("")
-          setEditedQuantity("1")
-          setOldItem("")
-          setOldQuantity("")
         }
       } catch (error) {
         console.error(error);
@@ -85,6 +81,8 @@ export default function TripCard({name, from, to, elements, id}) {
       setEditingIndex(null)
     }
   }
+
+  //sarebbe meglio gestire singoli elementi con id univoco al posto dell'indice
 
   const handleEditElement = (index, item, quantity) => {
     setEditingIndex(index); 
