@@ -16,4 +16,7 @@ Le tre settimane di lavoro impiegate per questa prima versione sono servite prin
 
 ## :construction_worker: Work in progress 
 Lavorerò ancora al progetto nei prossimi tempi sistemando le presenti e aggiungendo nuove funzionalità. </br>
-Il primo di tanti obbiettivi: autorizzazione e autenticazione degli account con corrispettivi dati personali. 
+Primi obbiettivi: 
+- autorizzazione e autenticazione degli account con corrispettivi dati personali;
+- crittografare le password
+- filtri stesura email esistente
